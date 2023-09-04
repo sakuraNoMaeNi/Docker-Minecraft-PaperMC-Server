@@ -41,6 +41,7 @@ ARG RCON_CLI_VER=1.6.0
 ADD https://github.com/itzg/rcon-cli/releases/download/${RCON_CLI_VER}/rcon-cli_${RCON_CLI_VER}_linux_${TARGETARCH}.tar.gz /tmp/rcon-cli.tgz
 RUN tar -x -C /usr/local/bin -f /tmp/rcon-cli.tgz rcon-cli && \
   rm /tmp/rcon-cli.tgz
+RUN rcon-cli op ${ADMIN}
 
 # Volumes for the external data (Server, World, Config...)
 VOLUME "/data"
@@ -53,7 +54,7 @@ EXPOSE 25565/udp
 EXPOSE 8123/tcp
 
 # Set memory size
-ARG memory_size=1G
+ARG memory_size=2.5G
 ENV MEMORYSIZE=$memory_size
 
 # Set Java Flags
